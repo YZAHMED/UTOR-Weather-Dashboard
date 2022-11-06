@@ -47,3 +47,32 @@ function loadWeatherZip(zipCpde, isClicked) {
             alert("Not a vaild Zip Code")
         });
 }
+
+
+
+function loadWeatherCity(city, isClicked) {
+
+    var linkURL = "https://api.openweathermap.org/data/2.5/forecast?q=" + city + ",us&appid=" + APIKey;
+    var weatherContainer = $("#weatherContainer");
+
+
+    $.ajax({
+        url: linkURL,
+        method: "GET"
+    })
+        .then(function (response) {
+
+            console.log(response);
+
+            if (!isClicked) {
+                saveLocations(response);
+                renderLocations();
+            }
+
+         
+            getWeatherData(response.city.coord.lat, response.city.coord.lon, response.city.name);
+
+        }).catch(function (response) {
+            alert("Not a valid City");
+        });
+}
