@@ -3,10 +3,10 @@ let locations = [];
 
 function getWeatherData(lat, lon, city) {
 
-    var queryURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=,minutely,hourly,alerts&appid=" + APIKey;
+    var linkURL = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=,minutely,hourly,alerts&appid=" + APIKey;
 
     $.ajax({
-        url: queryURL,
+        url: linkURL,
         method: "GET"
     })
 
@@ -18,3 +18,32 @@ function getWeatherData(lat, lon, city) {
 
         });
 };
+
+function loadWeatherZip(zipCpde, isClicked) {
+
+    var linkURL = "https://api.openweathermap.org/data/2.5/forecast?zip=" + zipCpde + ",us&appid=" + APIKey;
+    var weatherContainer = $("#weatherContainer");
+
+
+    $.ajax({
+        url: linkURL,
+        method: "GET"
+    })
+
+        .then(function (response) {
+
+            console.log(response);
+
+            if (!isClicked) {
+                saveLocations(response);
+                renderLocations();
+            }
+
+
+            //load weather
+            getWeatherData(response.city.coord.lat, response.city.coord.lon, response.city.name);
+
+        }).catch(function (response) {
+            alert("Not a vaild Zip Code")
+        });
+}
