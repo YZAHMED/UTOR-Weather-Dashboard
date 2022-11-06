@@ -40,7 +40,7 @@ function loadWeatherZip(zipCpde, isClicked) {
             }
 
 
-            //load weather
+            
             getWeatherData(response.city.coord.lat, response.city.coord.lon, response.city.name);
 
         }).catch(function (response) {
