@@ -137,3 +137,34 @@ function showWeatherData(weatherData, city) {
 
     $("#weatherData").show();
 }
+
+function loadLocations() {
+    var locationsArray = localStorage.getItem("locations");
+    if (locationsArray) {
+        locations = JSON.parse(locationsArray);
+        renderLocations();
+    }
+    else {
+        localStorage.setItem("locations", JSON.stringify(locations));
+    }
+}
+
+function renderLocations() {
+    var divLocations = $("#locationHistory");
+    divLocations.empty();
+
+    $.each(locations, function (index, item) {
+        var a = $("<a>").addClass("list-group-item list-group-item-action city").attr("data-city", locations[index]).text(locations[index]);
+        divLocations.append(a);
+    });
+
+    $("#locationHistory > a").off();
+
+    $("#locationHistory > a").click(function (event) {
+        var element = event.target;
+        var city = $(element).attr("data-city");
+
+        loadWeatherCity(city, true);
+    });
+
+}
