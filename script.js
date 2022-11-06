@@ -168,3 +168,35 @@ function renderLocations() {
     });
 
 }
+
+function saveLocations(data) {
+
+    var city = data.city.name;
+
+    locations.unshift(city);
+    localStorage.setItem("locations", JSON.stringify(locations));
+
+}
+
+$(document).ready(function () {
+
+    $("#weatherData").hide();
+
+    loadLocations();
+
+    $("#searchBtn").click(function (event) {
+        var element = event.target;
+        var searchCriteria = $("#zipCode").val();
+
+        if (searchCriteria !== "") {
+            var zip = parseInt(searchCriteria);
+
+            if (!isNaN(zip)) {
+                loadWeatherZip(zip, false);
+            }
+            else {
+                loadWeatherCity(searchCriteria, false);
+            }
+        }
+    });
+});
