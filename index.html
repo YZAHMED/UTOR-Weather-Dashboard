@@ -11,3 +11,20 @@
 </head>
 
 <body>
+  <div id="weatherContainer" class="container mb-3 mt-3">
+    <div id="weather" class="row">
+      <div id="title" class="col-12 title text-center font-weight-bold">
+        <h1>Weather Dashboard</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div id="zipCodeContainer" class="col-4 zipCode text-left font-weight-bold">
+        <p>Search for a City:</p>
+        <div class="input-group">
+          <input id="zipCode" type="search" class="form-control rounded " placeholder="Search" aria-label="Search"
+            aria-describedby="search-addon" />
+          <button id="searchBtn" type="button" class="SearchBtn btn-outline-primary">search</button>
+        </div>
+        <div id="locationHistory" class="list-group">
+        </div>
+      
